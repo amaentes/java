@@ -1,4 +1,5 @@
 package dz1;
+
 import java.util.Scanner;
 
 // Реализовать простой калькулятор (+-/*)
@@ -9,38 +10,26 @@ public class zadanie3 {
         System.out.print("Введите выражение: ");
         String expression = sc.nextLine();
         sc.close();
-        
-        String[] parts = expression.split("\\s+");
 
-        if (parts.length != 3) {
+        String[] parts;
+        if (expression.contains("+")) {
+            parts = expression.split("\\+");
+            double result = Double.parseDouble(parts[0].trim()) + Double.parseDouble(parts[1].trim());
+            System.out.println("Результат: " + result);
+        } else if (expression.contains("-")) {
+            parts = expression.split("-");
+            double result = Double.parseDouble(parts[0].trim()) - Double.parseDouble(parts[1].trim());
+            System.out.println("Результат: " + result);
+        } else if (expression.contains("*")) {
+            parts = expression.split("\\*");
+            double result = Double.parseDouble(parts[0].trim()) * Double.parseDouble(parts[1].trim());
+            System.out.println("Результат: " + result);
+        } else if (expression.contains("/")) {
+            parts = expression.split("/");
+            double result = Double.parseDouble(parts[0].trim()) / Double.parseDouble(parts[1].trim());
+            System.out.println("Результат: " + result);
+        } else {
             System.out.println("Некорректное выражение");
-            return;
         }
-        
-        double num1 = Double.parseDouble(parts[0]);
-        double num2 = Double.parseDouble(parts[2]);
-        char operator = parts[1].charAt(0);
-        
-        double result;
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                result = num1 / num2;
-                break;
-            default:
-                System.out.println("Некорректный оператор");
-                return;
-        }
-        
-        System.out.println("Результат: " + result);
-        
     }
 }
