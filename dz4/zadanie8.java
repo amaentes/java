@@ -14,17 +14,34 @@ public class zadanie8 {
         num2.add(5);
         num2.add(4);
         num2.add(3);
-        LinkedList<Integer> prodList = multiply(new LinkedList<>(num1), new LinkedList<>(num2));
+        LinkedList<Integer> prodList = (LinkedList<Integer>) multiply(new LinkedList<>(num1), new LinkedList<>(num2));
         LinkedList<Integer> sumList = add(new LinkedList<>(num1), new LinkedList<>(num2));
-        System.out.println(num1); // [3, 2, 1]
-        System.out.println(num2); // [5, 4, 3]
-        System.out.println(prodList); // [4, 2, 4, 3, 5]
-        System.out.println(sumList); // [4, 6, 8]
+        System.out.println(num1); 
+        System.out.println(num2); 
+        System.out.println(prodList); 
+        System.out.println(sumList); 
     }
 
-    private static LinkedList<Integer> multiply(Deque<Integer> num1, Deque<Integer> num2) {
-        int proiz = toInt(num1) * toInt(num2);
-        return toList(proiz);
+    public static Deque<Integer> multiply(Deque<Integer> deque1, Deque<Integer> deque2) {
+        int num1 = 0;
+        int num2 = 0;
+        int multiplier = 1;
+        while (!deque1.isEmpty()) {
+            num1 += deque1.removeLast() * multiplier;
+            multiplier *= 10;
+        }
+        multiplier = 1;
+        while (!deque2.isEmpty()) {
+            num2 += deque2.removeLast() * multiplier;
+            multiplier *= 10;
+        }
+        int result = num1 * num2;
+        Deque<Integer> dequeResult = new LinkedList<>();
+        while (result > 0) {
+            dequeResult.addFirst(result % 10);
+            result /= 10;
+        }
+        return dequeResult;
     }
 
     private static LinkedList<Integer> add(Deque<Integer> num1, Deque<Integer> num2) {
